@@ -1,20 +1,29 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const questionaries = require('../controller/questionary.js')
+const questions = require('../controller/question.js')
+const router = express.Router();
 
-/* GET home page. */
-router.get('/questionary/:id', function(req, res, next) {
-  const id = req.params.id;
-  console.log(req)
-  res.send(
-    {
-      questionaryId: id,
-      key: 'value'
-    }
-  )
-});
 
-router.post('/questionary', function(req, res, next) {
-  
-});
+// Create a new questionary
+router.post('/questionaries', questionaries.create);
+
+// Retrieve all questionaries
+router.get('/questionaries', questionaries.findAll);
+
+// Retrieve a single questionary with id
+router.get('/questionaries/:id', questionaries.findOne);
+
+// Update a questionary with id
+router.put('/questionaries/:id', questionaries.update);
+
+// Delete a questionary with id
+router.delete('/questionaries/:id', questionaries.delete);
+
+
+router.post('/questions', questions.create);
+
+router.get('/questions/:id', questions.findOne);
+
+router.put('/questions/:id', questions.update);
 
 module.exports = router;
